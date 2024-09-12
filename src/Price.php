@@ -26,8 +26,10 @@ class Price
      */
     public function getIncludeTaxPrice(int $price, bool $isReducedTaxItem): int
     {
+        // 税率の設定
         $tax = $isReducedTaxItem ? self::REDUCED_TAX_RATE : self::TAX_RATE;
-        return $this->getIntPrice($price * (1.0 + $tax));
+        // 販売価格（税込み）の金額を返す
+        return $this->getFloatToIntPrice($price * (1.0 + $tax));
     }
 
     /**
@@ -36,7 +38,7 @@ class Price
      * @param float $price
      * @return int
      */
-    public function getIntPrice(float $price) :int
+    public function getFloatToIntPrice(float $price) :int
     {
         return round($price);
     }

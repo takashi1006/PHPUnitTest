@@ -23,7 +23,11 @@ class PriceTest extends TestCase
      * @param int $expected
      * @return void
      */
-    public function testGetIncludeTaxPrice(int $testPrice, bool $testIsReducedTaxItem, int $expected)
+    public function testGetIncludeTaxPrice(
+        int $testPrice,
+        bool $testIsReducedTaxItem,
+        int $expected,
+    ) :void
     {
         $result = $this->target->getIncludeTaxPrice($testPrice, $testIsReducedTaxItem);
         $this->assertEquals($result, $expected);
@@ -55,20 +59,20 @@ class PriceTest extends TestCase
         ];
     }
 
-    #[DataProvider('getIntPriceProvider')]
+    #[DataProvider('getFloatToIntPriceProvider')]
     /**
      * 小数点以下を四捨五入し金額を返す のテスト
      * @param float $testPrice
      * @param int $expected
      * @return void
      */
-    public function testGetIntPrice(float $testPrice, int $expected)
+    public function testGetFloatToIntPrice(float $testPrice, int $expected)
     {
-        $result = $this->target->getIntPrice($testPrice);
+        $result = $this->target->getFloatToIntPrice($testPrice);
         $this->assertEquals($result, $expected);
     }
 
-    public static function getIntPriceProvider() :array
+    public static function getFloatToIntPriceProvider() :array
     {
         return [
             "正常系1" => [
